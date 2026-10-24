@@ -1,0 +1,40 @@
+{
+  "formats": {
+    "bundle": "ohagi_model_v1",
+    "parameters": "ohagi_pytree_npz_v1",
+    "inference": "ohagi_jax_inference_v1",
+    "program": "ohagi_jax_program_v1"
+  },
+  "required": {
+    "": [
+      "format",
+      "framework",
+      "parameters",
+      "inference"
+    ],
+    "parameters": [
+      "format",
+      "file",
+      "structure",
+      "array_count"
+    ],
+    "inference": [
+      "format",
+      "backend",
+      "framework",
+      "portable"
+    ],
+    "inference.portable": [
+      "format",
+      "file",
+      "sha256",
+      "batch_size",
+      "input_size",
+      "output_size",
+      "dtype",
+      "platforms",
+      "jax_version",
+      "export_api"
+    ]
+  }
+}

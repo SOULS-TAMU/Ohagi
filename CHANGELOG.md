@@ -8,6 +8,9 @@ The initial release is still in preparation, so no release date is assigned.
 
 ### Added
 
+- API, numerical, frontend integration, dependency review, documentation,
+  quality regression and informational performance workflows.
+
 - Expanded numerical, training, artifact and optional-adapter regression tests,
   with an inclusive 85% combined statement-and-branch coverage gate.
 
