@@ -81,10 +81,16 @@ print(outputs["projected"])
 
 ## Architecture
 
-![KKTHN, DAEHN and NLPOPTNet use the shared OHAGI engine and PURIN projection backend.](assets/hardnet-architecture.svg)
+OHAGI provides the shared learning workflow for the HardNet stack. The libraries
+separate framework-specific problem formulations from model training and
+numerical projection:
 
-The frontends supply problem definitions and task policies. OHAGI handles
-model composition, training and deployment; PURIN handles numerical projections.
+- **KKTHN, DAEHN and NLPOPTNet** supply their problem formulations and
+  framework-specific processing to the shared engine.
+- **OHAGI** composes backbones, projections and losses, runs training, and
+  manages checkpoints and JAX model export for `metadata.json` inference.
+- **PURIN** compiles projection problems and provides the solvers, sparse
+  kernels and differentiation used by the projection layers.
 
 ## Inference
 
