@@ -4,6 +4,11 @@
 
 # OHAGI
 
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](pyproject.toml)
+[![Powered by JAX](https://img.shields.io/badge/JAX-powered-8A2BE2)](https://docs.jax.dev/)
+[![License: Apache-2.0](https://img.shields.io/github/license/SOULS-TAMU/Ohagi?color=blue)](LICENSE)
+[![Citation: BibTeX](https://img.shields.io/badge/Citation-BibTeX-6F4E37)](CITATION.bib)
+
 **A shared JAX engine for hard-constrained neural networks.**
 
 Compose a neural backbone with a differentiable projection, train the model,
