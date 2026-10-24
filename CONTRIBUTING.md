@@ -114,4 +114,5 @@ build output, generated results or checkpoints.
 
 Contributions are provided under the project's [Apache-2.0 license](LICENSE).
 Preserve relevant attribution in [AUTHORS](AUTHORS) and [NOTICE](NOTICE).
-Software citation metadata is maintained in [CITATION.bib](CITATION.bib).
+Keep [CITATION.bib](CITATION.bib) and [CITATION.cff](CITATION.cff) consistent.
+The CFF metadata supports GitHub's citation panel; BibTeX remains available directly.

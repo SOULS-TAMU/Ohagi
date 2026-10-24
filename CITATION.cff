@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use OHAGI, please cite this software. A BibTeX entry is available in CITATION.bib."
+type: software
+title: "OHAGI: A shared JAX engine for hard-constrained neural networks"
+authors:
+  - name: "SOULS-TAMU contributors"
+version: "0.1.0"
+url: "https://github.com/SOULS-TAMU/Ohagi"
+repository-code: "https://github.com/SOULS-TAMU/Ohagi"
+license: Apache-2.0
