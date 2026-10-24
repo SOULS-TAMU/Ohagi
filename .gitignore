@@ -9,3 +9,10 @@ dist/
 .jax_compilation_cache/
 
 .dependency-wheels/
+
+.coverage*
+coverage.xml
+coverage.json
+htmlcov/
+coverage-input/
+coverage-site/

@@ -8,6 +8,9 @@ The initial release is still in preparation, so no release date is assigned.
 
 ### Added
 
+- GitHub Actions CI for numerical tests, package checks and Ruff, with measured
+  branch coverage reporting and scheduled Python CodeQL analysis.
+
 - A shared JAX learning engine for the KKTHN, DAEHN and NLPOPTNet frontends,
   with framework-specific problem definitions supplied by those packages.
 - Projected neural models using PURIN's projection algorithms and kernels.

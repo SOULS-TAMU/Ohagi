@@ -4,6 +4,10 @@
 
 # OHAGI
 
+[![CI](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/ci.yml)
+[![Coverage](https://raw.githubusercontent.com/SOULS-TAMU/Ohagi/codex/coverage/coverage.svg)](https://github.com/SOULS-TAMU/Ohagi/tree/codex/coverage)
+[![CodeQL](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/codeql.yml)
+
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](pyproject.toml)
 [![Powered by JAX](https://img.shields.io/badge/JAX-powered-8A2BE2)](https://docs.jax.dev/)
 [![License: Apache-2.0](https://img.shields.io/github/license/SOULS-TAMU/Ohagi?color=blue)](LICENSE)

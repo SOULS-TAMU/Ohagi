@@ -16,6 +16,7 @@ authors = [{name = "SOULS-TAMU contributors"}]
 keywords = ["jax", "constrained-learning", "differentiable-optimization"]
 
 [project.optional-dependencies]
+test = ["pytest>=8", "pytest-cov>=5"]
 dev = ["pytest>=8", "build", "ruff", "osqp>=1", "absl-py", "flatbuffers"]
 plotting = ["matplotlib>=3.8"]
 flax = ["flax>=0.8.5"]
@@ -38,3 +39,17 @@ docstring-code-format = true
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.coverage.run]
+branch = true
+source = ["ohagi"]
+
+[tool.coverage.report]
+show_missing = true
+precision = 1
+include_namespace_packages = true
+fail_under = 24
