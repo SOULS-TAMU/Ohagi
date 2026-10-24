@@ -107,11 +107,22 @@ See [model artifacts and checkpoints](docs/artifacts.md) for details.
 
 [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md) · [Citation](CITATION.bib)
 
-## Tested configurations
+## Cross-platform compatibility
 
-CPU CI covers Linux and Windows x86-64 and Apple Silicon macOS on Python
-3.10–3.14, a JAX 0.6.2 baseline on each OS, and Linux ARM64 on Python 3.13.
-See [the CI matrix and validation scope](CONTRIBUTING.md#automated-checks).
+CPU compatibility is verified in GitHub Actions:
+
+| Platform | Python versions |
+| --- | --- |
+| Linux x86-64 | 3.10–3.14 |
+| Windows x86-64 | 3.10–3.14 |
+| macOS Apple Silicon | 3.10–3.14 |
+| Linux ARM64 | 3.13 |
+
+CI checks current compatible JAX releases and JAX 0.6.2 on Python 3.12
+across all three OSes. See the [CI matrix](CONTRIBUTING.md#automated-checks).
+Flax, Optax, Orbax and Linux-exported inference bundles are also tested
+on Linux, Windows and macOS.
+
 
 ## License
 
