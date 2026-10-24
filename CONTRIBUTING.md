@@ -119,11 +119,26 @@ The CFF metadata supports GitHub's citation panel; BibTeX remains available dire
 
 ## Automated checks
 
-CI runs the numerical tests on Python 3.10–3.14, checks Ruff formatting and
-lint, and builds and installs the distributions. Python 3.10 exercises the
-latest dependency versions that still support that interpreter. Dependency
-resolution on newer interpreters exercises their available JAX wheels.
-A separate job checks Flax, Optax and Orbax. The test suite is in `tests/`.
+CI runs the full numerical suite on CPU across these configurations:
+
+| Platform | Python | JAX configuration |
+| --- | --- | --- |
+| Linux x86-64, Windows x86-64, macOS Apple Silicon | 3.10–3.14 | Newest compatible dependencies for each interpreter. |
+| Linux x86-64, Windows x86-64, macOS Apple Silicon | 3.12 | JAX/JAXlib 0.6.2 baseline. |
+| Linux ARM64 | 3.13 | Newest compatible dependencies. |
+
+The configuration tests additionally exercise float32/float64, eager/JIT
+execution and batch sizes one and four for the equality projection and
+functional backbone interfaces. Full solver regression tests use float64.
+Ruff runs on Linux; wheel and source-distribution builds and installation
+checks run on Linux, Windows and macOS. Each core test job uploads its OS,
+architecture, Python, package versions and JAX devices as a diagnostic artifact.
+The test suite is in `tests/`. CPU results do not establish GPU/TPU support.
+
+Flax, Optax and Orbax have separate integration jobs on all three OSes.
+Another job exports float32/float64 inference bundles on Linux and reloads
+the same artifacts on Linux, Windows and macOS using the exporter's JAX
+version. It exercises repeated single-instance inference from `metadata.json`.
 
 Install the test dependencies with `python -m pip install ".[test]"`, then run:
 
@@ -132,7 +147,7 @@ python -m pytest -q --ignore=tests/test_optional.py --cov=ohagi --cov-branch --c
 ```
 
 Coverage measures the entire package, including unexecuted modules. The badge
-combines statement and branch coverage from the Python 3.12 core test run.
+combines statement and branch coverage from the Linux x86-64 / Python 3.12 / current-JAX core test run.
 Reports are retained as workflow artifacts; the badge and measured totals are
 published to `codex/coverage` after successful trusted pushes to `main`.
 Pull requests run checks with read-only repository access and do not publish
