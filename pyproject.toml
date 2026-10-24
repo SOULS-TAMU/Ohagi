@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ohagi"
+version = "0.1.0"
+description = "Composable constrained learning and differentiable sparse optimization in JAX"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["purin>=0.1.0,<0.2", "jax>=0.4.30", "numpy>=1.26", "scipy>=1.11", "absl-py", "flatbuffers"]
+
+license = "Apache-2.0"
+license-files = ["LICENSE*", "NOTICE"]
+authors = [{name = "SOULS-TAMU contributors"}]
+keywords = ["jax", "constrained-learning", "differentiable-optimization"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "build", "ruff", "osqp>=1", "absl-py", "flatbuffers"]
+plotting = ["matplotlib>=3.8"]
+flax = ["flax>=0.8.5"]
+orbax = ["orbax-checkpoint>=0.6.4"]
+optax = ["optax>=0.2.4"]
+export = ["absl-py", "flatbuffers"]
+
+nlpoptnet = ["flax>=0.8.5", "optax>=0.2.4", "matplotlib>=3.8", "absl-py", "flatbuffers"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
