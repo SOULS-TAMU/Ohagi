@@ -84,18 +84,8 @@ jobs:
           path: ci-environment.json
           if-no-files-found: error
           retention-days: 14
-      - name: Tests and branch coverage
-        run: python -m pytest -q --ignore=tests/test_optional.py --cov=ohagi --cov-branch --cov-report=term-missing --cov-report=xml --cov-report=json
-      - name: Store coverage reports
-        if: matrix.os == 'ubuntu-latest' && matrix.python == '3.12' && matrix.jax == 'current'
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
-        with:
-          name: coverage
-          path: |
-            coverage.xml
-            coverage.json
-          if-no-files-found: error
-          retention-days: 14
+      - name: Core tests
+        run: python -m pytest -q --ignore=tests/test_optional.py
       - name: Export portable inference fixtures
         if: matrix.os == 'ubuntu-latest' && matrix.python == '3.12' && matrix.jax == 'current'
         run: python .github/scripts/portable_inference.py export inference-fixture
@@ -105,6 +95,34 @@ jobs:
         with:
           name: inference-fixture
           path: inference-fixture
+          if-no-files-found: error
+          retention-days: 14
+
+  full-coverage:
+    name: Full suite / coverage >= 85%
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install full test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "purin @ git+https://github.com/SOULS-TAMU/Purin.git@efaf4e0873d82dcf505081dd0005edf6f61d7ecd"
+          python -m pip install ".[test,flax,orbax,optax,plotting]"
+          python -m pip check
+      - name: Enforce inclusive statement and branch coverage
+        run: python -m pytest -q --cov=ohagi --cov-branch --cov-report=term-missing --cov-report=xml --cov-report=json
+      - name: Store full-suite coverage reports
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: coverage
+          path: |
+            coverage.xml
+            coverage.json
           if-no-files-found: error
           retention-days: 14
 
@@ -132,7 +150,7 @@ jobs:
           python -m pip install "purin @ git+https://github.com/SOULS-TAMU/Purin.git@efaf4e0873d82dcf505081dd0005edf6f61d7ecd"
           python -m pip install ".[test,flax,orbax,optax]"
           python -m pip check
-      - run: python -m pytest tests/test_optional.py -q
+      - run: python -m pytest tests/test_optional.py tests/test_optional_stateful.py -q
 
   package:
     name: Build and install / ${{ matrix.os }}
@@ -198,7 +216,7 @@ jobs:
 
   coverage:
     name: Publish measured coverage
-    needs: [quality, tests, package, optional-integrations, portable-inference]
+    needs: [quality, tests, full-coverage, package, optional-integrations, portable-inference]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 10

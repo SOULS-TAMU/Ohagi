@@ -143,11 +143,12 @@ version. It exercises repeated single-instance inference from `metadata.json`.
 Install the test dependencies with `python -m pip install ".[test]"`, then run:
 
 ```sh
-python -m pytest -q --ignore=tests/test_optional.py --cov=ohagi --cov-branch --cov-report=term-missing --cov-report=xml --cov-report=json
+python -m pip install ".[test,flax,orbax,optax,plotting]"
+python -m pytest -q --cov=ohagi --cov-branch --cov-report=term-missing --cov-report=xml --cov-report=json
 ```
 
 Coverage measures the entire package, including unexecuted modules. The badge
-combines statement and branch coverage from the Linux x86-64 / Python 3.12 / current-JAX core test run.
+combines statement and branch coverage from the Linux x86-64 / Python 3.12 / current-JAX full test run, including the optional adapters.
 Reports are retained as workflow artifacts; the badge and measured totals are
 published to `codex/coverage` after successful trusted pushes to `main`.
 Pull requests run checks with read-only repository access and do not publish
@@ -158,5 +159,6 @@ weekly schedule. Its badge reports workflow execution status; inspect code
 scanning alerts separately. GitHub Actions dependencies are pinned to commits
 and monitored by Dependabot.
 
-The initial combined coverage floor is 24%, based on the measured baseline.
-Raise this floor as coverage improves; do not omit modules to improve the score.
+The combined statement-and-branch coverage floor is 85%. All source modules,
+including optional adapters and unexecuted files, remain in the denominator.
+Do not omit modules to improve the score.

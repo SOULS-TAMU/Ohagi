@@ -96,7 +96,14 @@ def warmup(
     commit_update=False,
 ):
     """Compile and execute training/evaluation, optionally retaining the warm-up update."""
-    candidate, _ = train_step(state, example)
+    # Donating training steps may consume their input buffers. A discarded
+    # warm-up update must leave the caller's original state usable.
+    warmup_state = (
+        state
+        if commit_update
+        else jax.tree_util.tree_map(lambda leaf: jnp.array(leaf, copy=True), state)
+    )
+    candidate, _ = train_step(warmup_state, example)
     eval_step(parameters(candidate), example)
     jax.block_until_ready(parameters(candidate))
     return candidate if commit_update else state

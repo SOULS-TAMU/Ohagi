@@ -8,6 +8,9 @@ The initial release is still in preparation, so no release date is assigned.
 
 ### Added
 
+- Expanded numerical, training, artifact and optional-adapter regression tests,
+  with an inclusive 85% combined statement-and-branch coverage gate.
+
 - Cross-platform CPU CI for Linux, Windows and Apple Silicon macOS, with
   baseline/current JAX, runtime configuration artifacts and ARM64 coverage.
 
@@ -25,3 +28,7 @@ The initial release is still in preparation, so no release date is assigned.
 - Python package metadata, an executable quick start, model artifact
   documentation and contribution guidance.
 - Apache-2.0 licensing and machine-readable software citation metadata.
+
+### Fixed
+
+- Preserve training-state buffers when discarding a donated Flax warmup update.

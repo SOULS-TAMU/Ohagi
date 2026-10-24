@@ -52,4 +52,4 @@ source = ["ohagi"]
 show_missing = true
 precision = 1
 include_namespace_packages = true
-fail_under = 24
+fail_under = 85
