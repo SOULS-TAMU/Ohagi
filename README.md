@@ -1,7 +1,7 @@
-## Coverage: 26.1%
+## Coverage: 87.6%
 
 Measured over the entire package, including unexecuted modules. The percentage combines statements and branches.
 
-- Covered statements: 1042/3488
-- Covered branches: 115/948
-- Source commit: 3ce632ea003eec70a0e2c91ad779b65d9b34a3cd
+- Covered statements: 3152/3489
+- Covered branches: 737/948
+- Source commit: a5ce7dc16420fafdc1b43b55c578b40c8345d17d
