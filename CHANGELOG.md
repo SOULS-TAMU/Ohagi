@@ -8,11 +8,14 @@ The initial release is still in preparation, so no release date is assigned.
 
 ### Added
 
+- Added stateful update-rejection, early-stopping, compiled-epoch, metadata-validation
+  and extension-registry regression tests.
+
 - API, numerical, frontend integration, dependency review, documentation,
   quality regression and informational performance workflows.
 
 - Expanded numerical, training, artifact and optional-adapter regression tests,
-  with an inclusive 85% combined statement-and-branch coverage gate.
+  with an inclusive 90% combined statement-and-branch coverage gate.
 
 - Cross-platform CPU CI for Linux, Windows and Apple Silicon macOS, with
   baseline/current JAX, runtime configuration artifacts and ARM64 coverage.

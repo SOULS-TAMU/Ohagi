@@ -159,7 +159,7 @@ weekly schedule. Its badge reports workflow execution status; inspect code
 scanning alerts separately. GitHub Actions dependencies are pinned to commits
 and monitored by Dependabot.
 
-The combined statement-and-branch coverage floor is 85%. All source modules,
+The combined statement-and-branch coverage floor is 90%. All source modules,
 including optional adapters and unexecuted files, remain in the denominator.
 Do not omit modules to improve the score.
 

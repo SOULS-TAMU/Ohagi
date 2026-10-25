@@ -99,7 +99,7 @@ jobs:
           retention-days: 14
 
   full-coverage:
-    name: Full suite / coverage >= 85%
+    name: Full suite / coverage >= 90%
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:

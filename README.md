@@ -131,6 +131,9 @@ Flax, Optax, Orbax and Linux-exported inference bundles are also tested
 on Linux, Windows and macOS.
 
 
+CI requires at least **90% combined statement and branch coverage** across the
+whole package. The coverage badge reports the measured result.
+
 ## License
 
 [Apache License 2.0](LICENSE). See [NOTICE](NOTICE) for attribution.
