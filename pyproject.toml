@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ohagi"
-version = "0.1.0"
+version = "1.0.0"
 description = "Composable constrained learning and differentiable sparse optimization in JAX"
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = ["purin>=0.1.0,<0.2", "jax>=0.4.30", "numpy>=1.26", "scipy>=1.11", "absl-py", "flatbuffers"]
+dependencies = ["purin>=1.0.0,<2.0.0", "jax>=0.4.30", "numpy>=1.26", "scipy>=1.11", "absl-py", "flatbuffers"]
 
 license = "Apache-2.0"
 license-files = ["LICENSE*", "NOTICE"]

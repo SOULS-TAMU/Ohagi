@@ -50,7 +50,7 @@ jobs:
           cache: pip
       - name: Install candidate and dependencies
         run: |
-          python -m pip install "purin @ git+https://github.com/SOULS-TAMU/Purin.git@40f7a261a3d791b78bdedbdf80770d0daf909740"
+          python -m pip install "purin @ git+https://github.com/SOULS-TAMU/Purin.git@5cbbd0ca41cc83069da6144abcdbe85164f59b94"
           python -m pip install ".[test,flax,orbax,optax,plotting]"
           python -m pip check
       - run: python .github/scripts/numerical_regression.py
@@ -135,7 +135,7 @@ jobs:
           cache: pip
       - name: Install identical dependencies for both measurements
         run: |
-          python -m pip install "purin @ git+https://github.com/SOULS-TAMU/Purin.git@40f7a261a3d791b78bdedbdf80770d0daf909740"
+          python -m pip install "purin @ git+https://github.com/SOULS-TAMU/Purin.git@5cbbd0ca41cc83069da6144abcdbe85164f59b94"
           python -m pip install ".[test,flax,orbax,optax,plotting]"
       - name: Check out the comparison source without executing its workflows
         run: |
@@ -170,7 +170,7 @@ jobs:
           cache: pip
       - name: Install candidate and frozen consumer adapters
         run: |
-          python -m pip install "purin @ git+https://github.com/SOULS-TAMU/Purin.git@40f7a261a3d791b78bdedbdf80770d0daf909740"
+          python -m pip install "purin @ git+https://github.com/SOULS-TAMU/Purin.git@5cbbd0ca41cc83069da6144abcdbe85164f59b94"
           python -m pip install ".[test,flax,orbax,optax,plotting]"
           python -m pip install --no-deps .github/fixtures/frontends/{kkthn,daehn,nlpoptnet}
           python -m pip check

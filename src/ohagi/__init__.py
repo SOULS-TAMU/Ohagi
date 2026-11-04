@@ -10,7 +10,7 @@ from ohagi.compat import plugins as _plugins
 from ohagi._projection_aliases import ALIASES as _PROJECTION_ALIASES
 
 install_aliases(_PROJECTION_ALIASES)
-__version__ = "0.1.0"
+__version__ = "1.0.0"
 _EXPORTS = {
     "Problem": ("problems", "Problem"),
     "Projection": ("problems", "Projection"),

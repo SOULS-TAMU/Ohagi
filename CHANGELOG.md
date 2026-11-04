@@ -4,7 +4,7 @@ Notable changes to OHAGI are recorded here. This history starts with the
 initial public version; internal development steps are not separate releases.
 The initial release is still in preparation, so no release date is assigned.
 
-## 0.1.0 — Unreleased
+## 1.0.0 — Unreleased
 
 ### Added
 
