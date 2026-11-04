@@ -1,46 +1,52 @@
 <p align="center">
-  <img src="assets/ohagi-logo.png" alt="OHAGI logo" width="220">
+  <img src="assets/ohagi-logo.png" alt="OHAGI logo" width="200">
 </p>
 
 # OHAGI
 
-[![CI](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/ci.yml)
-[![Coverage](https://raw.githubusercontent.com/SOULS-TAMU/Ohagi/codex/coverage/coverage.svg)](https://github.com/SOULS-TAMU/Ohagi/tree/codex/coverage)
-[![CodeQL](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/codeql.yml)
-[![Validation](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/validation.yml/badge.svg?branch=main)](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/validation.yml)
+**One JAX engine for building, training and deploying hard-constrained neural models.**
 
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)](pyproject.toml)
-[![Powered by JAX](https://img.shields.io/badge/JAX-powered-8A2BE2)](https://docs.jax.dev/)
-[![License: Apache-2.0](https://img.shields.io/github/license/SOULS-TAMU/Ohagi?color=blue)](LICENSE)
-[![Citation: BibTeX](https://img.shields.io/badge/Citation-BibTeX-6F4E37)](CITATION.bib)
+[![CI](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/ci.yml/badge.svg?branch=development)](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/ci.yml?query=branch%3Adevelopment)
+[![Validation](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/validation.yml/badge.svg?branch=development)](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/validation.yml?query=branch%3Adevelopment)
+[![CodeQL](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/codeql.yml/badge.svg?branch=development)](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/codeql.yml?query=branch%3Adevelopment)
+[![Dependency review](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/dependency-review.yml/badge.svg?branch=development)](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/dependency-review.yml?query=branch%3Adevelopment)
+[![Coverage](https://raw.githubusercontent.com/SOULS-TAMU/Ohagi/codex/coverage-development/coverage.svg)](https://github.com/SOULS-TAMU/Ohagi/tree/codex/coverage-development)
 
-**A shared JAX engine for hard-constrained neural networks.**
+[![Python 3.10–3.14](https://img.shields.io/badge/Python-3.10%E2%80%933.14-3776AB?logo=python&logoColor=white)](.github/workflows/ci.yml)
+[![CPU platforms](https://img.shields.io/badge/CPU-Linux%20%7C%20Windows%20%7C%20macOS-555555)](.github/workflows/ci.yml)
+[![JAX](https://img.shields.io/badge/Powered_by-JAX-8A2BE2)](https://docs.jax.dev/)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue)](LICENSE)
+[![Citation: BibTeX](https://img.shields.io/badge/Cite-BibTeX-6F4E37)](CITATION.bib)
 
-Compose a neural backbone with a differentiable projection, train the model,
-and prepare it for repeated single-instance inference. OHAGI powers KKTHN,
-DAEHN and NLPOPTNet, with projection algorithms and sparse kernels supplied by PURIN.
+Combine a neural backbone, a differentiable projection and a loss in one
+learning workflow. OHAGI powers KKTHN, DAEHN and NLPOPTNet while leaving
+framework-specific problem processing in the frontends and numerical projection
+in PURIN.
 
-[Installation](#installation) · [Quick start](#quick-start) · [Architecture](#architecture) · [Inference](#inference) · [Contributing](CONTRIBUTING.md)
+- **Composable models:** shared backbone, projection and loss interfaces.
+- **Flexible training:** functional JAX networks, optional Flax/Optax adapters,
+  and optional Orbax checkpoints for training continuation.
+- **One deployment pathway:** JAX export and `metadata.json` loading across frontends.
+- **Repeated inference:** load and warm the exported signature once, then reuse it.
 
-- **Flexible backbones:** functional JAX networks and optional Flax Linen modules.
-- **Shared training:** projected models, losses, optimizers and optional Orbax checkpoints.
-- **Portable inference:** one JAX export/load interface across all three frontends.
+[Installation](#installation) · [Basic API](#basic-api) · [Load and predict](#load-and-predict) · [Documentation](#documentation) · [Contributing](#contributing) · [Citation](#citation)
 
 ## Installation
 
-From a `hardnet-stack` checkout:
+This README documents the **development branch**. Install its source packages
+in dependency order with Python 3.10 or newer:
 
 ```shell
-python -m pip install ./purin ./ohagi
+python -m pip install "purin @ git+https://github.com/SOULS-TAMU/Purin.git@development"
+python -m pip install "ohagi @ git+https://github.com/SOULS-TAMU/Ohagi.git@development"
 ```
 
-Python 3.10+ is required. For GPU support, follow the
-[JAX installation guide](https://docs.jax.dev/en/latest/installation.html).
-Optional integrations: `python -m pip install "./ohagi[flax,orbax,optax]"`.
+From a local stack checkout, use `python -m pip install ./purin ./ohagi`.
+Optional integrations are available as `ohagi[flax,orbax,optax,plotting]`.
 
-## Quick start
+## Basic API
 
-Train a small network whose projected outputs satisfy **u + v = b**:
+Train a small projected network whose outputs satisfy **u + v = b**:
 
 ```python
 import jax
@@ -80,60 +86,80 @@ outputs, _ = model.apply(
 print(outputs["projected"])
 ```
 
-## Architecture
+The backbone predicts a candidate; PURIN projects it onto the constraint set;
+OHAGI evaluates the loss and updates the model through the shared training engine.
+Choose solver tolerances and numerical precision for the problem.
 
-OHAGI provides the shared learning workflow for the HardNet stack. The libraries
-separate framework-specific problem formulations from model training and
-numerical projection:
+## Load and predict
 
-- **KKTHN, DAEHN and NLPOPTNet** supply their problem formulations and
-  framework-specific processing to the shared engine.
-- **OHAGI** composes backbones, projections and losses, runs training, and
-  manages checkpoints and JAX model export for `metadata.json` inference.
-- **PURIN** compiles projection problems and provides the solvers, sparse
-  kernels and differentiation used by the projection layers.
-
-## Inference
-
-Export a trained frontend model with `model.export_inference("deployment/metadata.json")`.
-Then load once and reuse the predictor:
+A trained frontend can export its graph using
+`model.export_inference("deployment/metadata.json")`. Load that bundle once:
 
 ```python
 from ohagi.inference import load
 
 predictor = load("deployment/metadata.json")
-prediction = predictor.predict(single_input)
+for value in [0.4, 0.7, 1.0]:
+    prediction = predictor.predict([value])
 ```
 
-Keep the referenced `.jax_export` file alongside `metadata.json`.
-`predict` returns NumPy values; `predict_jax` keeps results on the JAX device.
-Deployment uses JAX and does not require a frontend, Flax or Orbax.
-See [model artifacts and checkpoints](docs/artifacts.md) for details.
+Use inputs matching the exported signature. Keep the referenced `.jax_export`
+file with `metadata.json`; metadata alone is not the complete model.
+`predict` returns synchronized NumPy values, while `predict_jax` returns a JAX
+array. The deployment graph does not require the originating frontend, Flax
+or Orbax. Orbax training checkpoints are separate from inference bundles.
 
-## Project information
+## The HardNet stack
 
-[Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md) · [Citation](CITATION.bib)
+- **[KKTHN](https://github.com/SOULS-TAMU/kkt-hardnet/tree/development),
+  [DAEHN](https://github.com/SOULS-TAMU/dae-hardnet/tree/development) and
+  [NLPOPTNet](https://github.com/SOULS-TAMU/nlpoptnet)** supply problem formulations
+  and framework-specific processing.
+- **[OHAGI](https://github.com/SOULS-TAMU/Ohagi/tree/development)** composes models,
+  runs the shared learning engine, and handles checkpoints and JAX deployment.
+- **[PURIN](https://github.com/SOULS-TAMU/Purin/tree/development)** owns projection
+  problems, numerical solvers, sparse kernels and projection differentiation.
 
-## Cross-platform compatibility
+## Compatibility and validation
 
-CPU compatibility is verified in GitHub Actions:
+The CPU CI matrix covers **Python 3.10–3.14** on Linux, Windows and macOS,
+plus Linux ARM64 on Python 3.13. It exercises current compatible JAX releases
+and JAX 0.6.2 on Python 3.12. See the [workflow](.github/workflows/ci.yml)
+for exact environments; accelerator installation follows the
+[JAX guide](https://docs.jax.dev/en/latest/installation.html).
 
-| Platform | Python versions |
+- **CI:** tests, distribution builds and installation checks.
+- **Validation:** public APIs, numerical references, documentation and code quality.
+- **Coverage:** at least **90% combined statement and branch coverage**; the badge
+  links to the measured report for this branch.
+- **Security:** CodeQL analysis and dependency review.
+
+Optional Flax, Optax and Orbax integrations and exported inference bundles are
+also exercised across Linux, Windows and macOS.
+
+## Documentation
+
+| Resource | Contents |
 | --- | --- |
-| Linux x86-64 | 3.10–3.14 |
-| Windows x86-64 | 3.10–3.14 |
-| macOS Apple Silicon | 3.10–3.14 |
-| Linux ARM64 | 3.13 |
+| [Artifacts and checkpoints](docs/artifacts.md) | Model bundles, JAX deployment and training continuation |
+| [Contribution guide](CONTRIBUTING.md) | Engine boundaries, development setup and validation |
+| [Validation policy](.github/validation/README.md) | API, numerical and quality checks |
+| [Changelog](CHANGELOG.md) | Initial release scope and changes |
 
-CI checks current compatible JAX releases and JAX 0.6.2 on Python 3.12
-across all three OSes. See the [CI matrix](CONTRIBUTING.md#automated-checks).
-Flax, Optax, Orbax and Linux-exported inference bundles are also tested
-on Linux, Windows and macOS.
+## Contributing
 
+Bug reports, examples and focused pull requests are welcome. Read
+[CONTRIBUTING.md](CONTRIBUTING.md) for setup, numerical checks and compatibility
+requirements. Keep generated results, environments and checkpoints out of Git.
 
-CI requires at least **90% combined statement and branch coverage** across the
-whole package. The coverage badge reports the measured result.
+## Citation
+
+Use [CITATION.bib](CITATION.bib) for a copyable BibTeX entry or GitHub's
+**Cite this repository** menu for [citation metadata](CITATION.cff).
 
 ## License
 
-[Apache License 2.0](LICENSE). See [NOTICE](NOTICE) for attribution.
+[Apache License 2.0](LICENSE). Authorship and upstream attribution are recorded
+in [AUTHORS](AUTHORS) and [NOTICE](NOTICE).
+
+[Changelog](CHANGELOG.md) · [Report an issue](https://github.com/SOULS-TAMU/Ohagi/issues)
