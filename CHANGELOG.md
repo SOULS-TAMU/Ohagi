@@ -6,6 +6,9 @@ The initial release is still in preparation, so no release date is assigned.
 
 ## 1.0.0 — Unreleased
 
+- Promote the shared-stack implementation to `main`; preserve the previous main in `v0.1.0`.
+- Align main-branch installation links, badges and citation metadata.
+
 ### Added
 
 - Added stateful update-rejection, early-stopping, compiled-epoch, metadata-validation
