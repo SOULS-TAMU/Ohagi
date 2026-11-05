@@ -5,6 +5,7 @@ title: "OHAGI: A shared JAX engine for hard-constrained neural networks"
 authors:
   - name: "SOULS-TAMU contributors"
 version: "1.0.0"
-url: "https://github.com/SOULS-TAMU/Ohagi"
+url: "https://github.com/SOULS-TAMU/Ohagi/releases/tag/v1.0.0"
 repository-code: "https://github.com/SOULS-TAMU/Ohagi"
 license: Apache-2.0
+date-released: "2026-11-05"
