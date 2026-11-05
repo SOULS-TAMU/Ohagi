@@ -143,13 +143,11 @@ the benchmark-facing model interface is preserved.
 
 ## Development and validation
 
-Packaging uses the `src` layout and `pyproject.toml`. See
-[../VALIDATION.md](../VALIDATION.md) for numerical comparisons and installation
-checks, [CONTRIBUTING.md](CONTRIBUTING.md) for development guidelines, and
-[CITATION.cff](CITATION.cff) for citation information.
-
-See [CHANGELOG.md](CHANGELOG.md), [LICENSE](LICENSE), and [NOTICE](NOTICE) for
-changes, licensing, and attribution.
+This copy is a test-only integration fixture, not a separately maintained
+repository. See the [fixture guide](../README.md) for its scope and refresh
+policy and the [OHAGI validation policy](../../../validation/README.md) for
+integration checks. The fixture includes its own [LICENSE](LICENSE) and
+[NOTICE](NOTICE); source and packaging hashes are recorded in the parent manifest.
 
 ## License
 
