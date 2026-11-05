@@ -159,7 +159,7 @@ jobs:
           if-no-files-found: error
 
   frontend-integration:
-    name: Frozen frontend integration / ${{ matrix.framework }}
+    name: Published frontend integration / ${{ matrix.framework }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     strategy:
@@ -172,11 +172,12 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
-      - name: Install candidate and frozen consumer adapters
+      - name: Install candidate and published consumer adapters
         run: |
-          python -m pip install "purin @ git+https://github.com/SOULS-TAMU/Purin.git@5cbbd0ca41cc83069da6144abcdbe85164f59b94"
+          python -m pip install "purin==1.0.0"
           python -m pip install ".[test,flax,orbax,optax,plotting]"
-          python -m pip install --no-deps .github/fixtures/frontends/{kkthn,daehn,nlpoptnet}
+          python -m pip install --no-deps --index-url https://pypi.org/simple/ "kkt-hardnet==2.0.0" "daehn==2.0.0"
+          python -m pip install --no-deps .github/fixtures/frontends/nlpoptnet
           python -m pip check
       - name: Short training, constraints and metadata reload
         run: python .github/scripts/frontend_integration.py "${{ matrix.framework }}"

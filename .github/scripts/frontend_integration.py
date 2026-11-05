@@ -1,7 +1,9 @@
-"""Real frozen frontend consumers train briefly and reload metadata in a fresh process."""
+"""Published frontends and the frozen NLP adapter exercise candidate core packages."""
 
 import argparse
 import hashlib
+from importlib import import_module
+from importlib.metadata import version
 import json
 import os
 from pathlib import Path
@@ -234,13 +236,34 @@ def main():
     jax.config.update("jax_enable_x64", True)
     root = Path(__file__).resolve().parents[2]
     fixtures = root / ".github/fixtures/frontends"
-    for name, digest in json.loads((fixtures / "manifest.json").read_text()).items():
-        assert (
-            hashlib.sha256(
-                (fixtures / name).read_bytes().replace(b"\r\n", b"\n")
-            ).hexdigest()
-            == digest
-        ), name
+    if args.framework == "nlpoptnet":
+        manifest = json.loads((fixtures / "manifest.json").read_text())
+        frozen = {
+            name: digest
+            for name, digest in manifest.items()
+            if name.startswith("nlpoptnet/")
+        }
+        assert frozen, "The NLP frontend fixture manifest is empty"
+        for name, digest in frozen.items():
+            assert (
+                hashlib.sha256(
+                    (fixtures / name).read_bytes().replace(b"\r\n", b"\n")
+                ).hexdigest()
+                == digest
+            ), name
+        consumer = {"source": "frozen fixture", "framework": args.framework}
+    else:
+        distribution = "kkt-hardnet" if args.framework == "kkthn" else "daehn"
+        module = import_module(args.framework)
+        assert version(distribution) == "2.0.0"
+        assert "site-packages" in str(Path(module.__file__).resolve()), (
+            "Consumer must be an installed wheel"
+        )
+        consumer = {
+            "source": "PyPI",
+            "distribution": distribution,
+            "version": version(distribution),
+        }
     with tempfile.TemporaryDirectory() as directory:
         original = Path.cwd()
         os.chdir(directory)
@@ -248,6 +271,7 @@ def main():
             result = globals()[args.framework](Path(directory))
         finally:
             os.chdir(original)
+    result["consumer"] = consumer
     (root / f"integration-{args.framework}.json").write_text(
         json.dumps(result, indent=2) + "\n", encoding="utf-8"
     )
