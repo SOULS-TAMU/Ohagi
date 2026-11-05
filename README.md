@@ -15,11 +15,11 @@
 [![Dependency review](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/dependency-review.yml/badge.svg?branch=main)](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/dependency-review.yml?query=branch%3Amain)
 [![Coverage](https://raw.githubusercontent.com/SOULS-TAMU/Ohagi/codex/coverage/coverage.svg)](https://github.com/SOULS-TAMU/Ohagi/tree/codex/coverage)
 
-[![Python 3.10–3.15](https://img.shields.io/badge/Python-3.10%E2%80%933.15-3776AB?logo=python&logoColor=white)](https://github.com/SOULS-TAMU/Ohagi/blob/main/.github/workflows/release.yml)
-[![CPU platforms](https://img.shields.io/badge/CPU-Linux%20%7C%20Windows%20%7C%20macOS-555555)](https://github.com/SOULS-TAMU/Ohagi/blob/main/.github/workflows/ci.yml)
+[![Python 3.10â€“3.15](https://img.shields.io/badge/Python-3.10%E2%80%933.15-3776AB?logo=python&logoColor=white)](.github/workflows/release.yml)
+[![CPU platforms](https://img.shields.io/badge/CPU-Linux%20%7C%20Windows%20%7C%20macOS-555555)](.github/workflows/ci.yml)
 [![JAX](https://img.shields.io/badge/Powered_by-JAX-8A2BE2)](https://docs.jax.dev/)
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue)](https://github.com/SOULS-TAMU/Ohagi/blob/main/LICENSE)
-[![Citation: BibTeX](https://img.shields.io/badge/Cite-BibTeX-6F4E37)](https://github.com/SOULS-TAMU/Ohagi/blob/main/CITATION.bib)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue)](LICENSE)
+[![Citation: BibTeX](https://img.shields.io/badge/Cite-BibTeX-6F4E37)](CITATION.bib)
 
 Combine a neural backbone, a differentiable projection and a loss in one
 learning workflow. OHAGI powers KKTHN, DAEHN and NLPOPTNet while leaving
@@ -32,7 +32,7 @@ in PURIN.
 - **One deployment pathway:** JAX export and `metadata.json` loading across frontends.
 - **Repeated inference:** load and warm the exported signature once, then reuse it.
 
-[Installation](#installation) · [Basic API](#basic-api) · [Load and predict](#load-and-predict) · [Documentation](#documentation) · [Contributing](#contributing) · [Citation](#citation)
+[Installation](#installation) Â· [Basic API](#basic-api) Â· [Load and predict](#load-and-predict) Â· [Documentation](#documentation) Â· [Contributing](#contributing) Â· [Citation](#citation)
 
 ## Installation
 
@@ -50,7 +50,7 @@ python -m pip install --upgrade ohagi
 
 PURIN is installed automatically. Optional integrations are available as
 `ohagi[flax,orbax,optax,plotting]`. For source/editable installs, see
-[installation options](https://github.com/SOULS-TAMU/Ohagi/blob/main/docs/INSTALL.md).
+[installation options](docs/INSTALL.md).
 
 ## Basic API
 
@@ -119,20 +119,20 @@ or Orbax. Orbax training checkpoints are separate from inference bundles.
 
 ## The HardNet stack
 
-- **[KKTHN](https://github.com/SOULS-TAMU/kkt-hardnet/tree/main),
-  [DAEHN](https://github.com/SOULS-TAMU/dae-hardnet/tree/main) and
+- **[KKTHN](https://github.com/SOULS-TAMU/kkt-hardnet),
+  [DAEHN](https://github.com/SOULS-TAMU/dae-hardnet) and
   [NLPOPTNet](https://github.com/SOULS-TAMU/nlpoptnet)** supply problem formulations
   and framework-specific processing.
-- **[OHAGI](https://github.com/SOULS-TAMU/Ohagi/tree/main)** composes models,
+- **[OHAGI](https://github.com/SOULS-TAMU/Ohagi)** composes models,
   runs the shared learning engine, and handles checkpoints and JAX deployment.
-- **[PURIN](https://github.com/SOULS-TAMU/Purin/tree/main)** owns projection
+- **[PURIN](https://github.com/SOULS-TAMU/Purin)** owns projection
   problems, numerical solvers, sparse kernels and projection differentiation.
 
 ## Compatibility and validation
 
-The PyPI CPU installation matrix covers **Python 3.10–3.15** on Linux, Windows and macOS,
+The PyPI CPU installation matrix covers **Python 3.10â€“3.15** on Linux, Windows and macOS,
 plus Linux ARM64 on Python 3.13. It uses current compatible JAX releases;
-regular CI additionally tests JAX 0.6.2 on Python 3.12. See the [release workflow](https://github.com/SOULS-TAMU/Ohagi/blob/main/.github/workflows/release.yml)
+regular CI additionally tests JAX 0.6.2 on Python 3.12. See the [release workflow](.github/workflows/release.yml)
 for exact environments; accelerator installation follows the
 [JAX guide](https://docs.jax.dev/en/latest/installation.html).
 
@@ -147,35 +147,35 @@ also exercised across Linux, Windows and macOS.
 
 ## Documentation
 
-**[Read the full documentation](https://ohagi.readthedocs.io/en/latest/)** — installation, tutorials, user guide and API reference.
+**[Read the full documentation](https://ohagi.readthedocs.io/en/latest/)** â€” installation, tutorials, user guide and API reference.
 
-The full Sphinx guide follows the Read the Docs style: [contents](https://github.com/SOULS-TAMU/Ohagi/blob/main/docs/index.rst),
-[runnable examples](https://github.com/SOULS-TAMU/Ohagi/blob/main/docs/examples/index.rst), [API reference](https://github.com/SOULS-TAMU/Ohagi/blob/main/docs/api/index.rst)
-and [build instructions](https://github.com/SOULS-TAMU/Ohagi/blob/main/docs/BUILD.md).
+The full Sphinx guide follows the Read the Docs style: [contents](docs/index.rst),
+[runnable examples](docs/examples/index.rst), [API reference](docs/api/index.rst)
+and [build instructions](docs/BUILD.md).
 
 | Resource | Contents |
 | --- | --- |
-| [Artifacts and checkpoints](https://github.com/SOULS-TAMU/Ohagi/blob/main/docs/artifacts.md) | Model bundles, JAX deployment and training continuation |
-| [Contribution guide](https://github.com/SOULS-TAMU/Ohagi/blob/main/CONTRIBUTING.md) | Engine boundaries, development setup and validation |
-| [Validation policy](https://github.com/SOULS-TAMU/Ohagi/blob/main/.github/validation/README.md) | API, numerical and quality checks |
-| [Changelog](https://github.com/SOULS-TAMU/Ohagi/blob/main/CHANGELOG.md) | Initial release scope and changes |
+| [Artifacts and checkpoints](docs/artifacts.md) | Model bundles, JAX deployment and training continuation |
+| [Contribution guide](CONTRIBUTING.md) | Engine boundaries, development setup and validation |
+| [Validation policy](.github/validation/README.md) | API, numerical and quality checks |
+| [Changelog](CHANGELOG.md) | Initial release scope and changes |
 
 ## Contributing
 
 Bug reports, examples and focused pull requests are welcome. Read
-[CONTRIBUTING.md](https://github.com/SOULS-TAMU/Ohagi/blob/main/CONTRIBUTING.md) for setup, numerical checks and compatibility
+[CONTRIBUTING.md](CONTRIBUTING.md) for setup, numerical checks and compatibility
 requirements. Keep generated results, environments and checkpoints out of Git.
 
 ## Citation
 
-Use [CITATION.bib](https://github.com/SOULS-TAMU/Ohagi/blob/main/CITATION.bib) for a copyable BibTeX entry or GitHub's
-**Cite this repository** menu for [citation metadata](https://github.com/SOULS-TAMU/Ohagi/blob/main/CITATION.cff).
+Use [CITATION.bib](CITATION.bib) for a copyable BibTeX entry or GitHub's
+**Cite this repository** menu for [citation metadata](CITATION.cff).
 
 ## License
 
-[Apache License 2.0](https://github.com/SOULS-TAMU/Ohagi/blob/main/LICENSE). Authorship and upstream attribution are recorded
-in [AUTHORS](https://github.com/SOULS-TAMU/Ohagi/blob/main/AUTHORS) and [NOTICE](https://github.com/SOULS-TAMU/Ohagi/blob/main/NOTICE).
+[Apache License 2.0](LICENSE). Authorship and upstream attribution are recorded
+in [AUTHORS](AUTHORS) and [NOTICE](NOTICE).
 
-[Changelog](https://github.com/SOULS-TAMU/Ohagi/blob/main/CHANGELOG.md) · [Report an issue](https://github.com/SOULS-TAMU/Ohagi/issues)
+[Changelog](CHANGELOG.md) Â· [Report an issue](https://github.com/SOULS-TAMU/Ohagi/issues)
 
 Measured source structure and existing quality limits are documented in [Quality](docs/QUALITY.md).

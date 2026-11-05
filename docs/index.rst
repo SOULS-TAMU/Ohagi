@@ -42,7 +42,6 @@ single-instance inference interface.
    BUILD
    PUBLISHING
    QUALITY
-   QUALITY
 
 Indices and search
 ------------------
