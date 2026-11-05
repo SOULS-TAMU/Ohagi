@@ -139,6 +139,8 @@ also exercised across Linux, Windows and macOS.
 
 ## Documentation
 
+**[Read the full documentation](https://ohagi.readthedocs.io/en/latest/)** — installation, tutorials, user guide and API reference.
+
 The full Sphinx guide follows the Read the Docs style: [contents](docs/index.rst),
 [runnable examples](docs/examples/index.rst), [API reference](docs/api/index.rst)
 and [build instructions](docs/BUILD.md).
