@@ -1,0 +1,26 @@
+# Installation
+
+Use Python 3.10 or newer and an isolated environment. The distribution name is
+`ohagi`; the Python import is `ohagi`.
+
+```shell
+python -m venv .venv
+# PowerShell: .venv\Scripts\Activate.ps1
+# Linux/macOS: source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install "purin @ git+https://github.com/SOULS-TAMU/Purin.git@main"
+python -m pip install "ohagi @ git+https://github.com/SOULS-TAMU/Ohagi.git@main"
+python -c "import ohagi; print(ohagi.__version__)"
+```
+
+These source commands select the current shared-stack implementation. Package-index
+publishing is a separate release step. For a local editable installation, install
+the sibling packages in dependency order using `python -m pip install -e <folder>`.
+Start with CPU execution and choose supported JAX/CUDA dependencies if needed.
+
+## Optional integrations
+
+From a local stack checkout, install `python -m pip install "./ohagi[flax,orbax]"`
+for optional Flax backbones and Orbax training checkpoints. OHAGI also offers
+`optax`, `plotting` and `export` extras. Functional JAX backbones remain the default.
+Deploying a compatible frozen JAX graph does not require Flax or Orbax.

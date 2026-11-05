@@ -139,6 +139,10 @@ also exercised across Linux, Windows and macOS.
 
 ## Documentation
 
+The full Sphinx guide follows the Read the Docs style: [contents](docs/index.rst),
+[runnable examples](docs/examples/index.rst), [API reference](docs/api/index.rst)
+and [build instructions](docs/BUILD.md).
+
 | Resource | Contents |
 | --- | --- |
 | [Artifacts and checkpoints](docs/artifacts.md) | Model bundles, JAX deployment and training continuation |
