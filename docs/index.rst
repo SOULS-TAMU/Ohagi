@@ -40,6 +40,7 @@ single-instance inference interface.
    contributing
    changelog
    BUILD
+   PUBLISHING
 
 Indices and search
 ------------------
