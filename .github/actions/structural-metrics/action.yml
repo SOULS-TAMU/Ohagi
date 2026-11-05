@@ -1,0 +1,10 @@
+name: Structural metrics
+description: Enforce each caller's existing complexity, duplication, type and boundary limits
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        python -m pip install -r .github/validation/requirements.txt
+        npx --yes jscpd@5.4.2 --reporters json --output quality-duplication --min-tokens 80 --min-lines 6 --silent src
+        python .github/scripts/quality_metrics.py quality-duplication/jscpd-report.json

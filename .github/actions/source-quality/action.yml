@@ -1,0 +1,13 @@
+name: Source quality
+description: Shared formatting, static error and compilation checks
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        python -m pip install ruff
+        paths=(src tests .github/scripts)
+        if [[ -d .github/shared ]]; then paths+=(.github/shared); fi
+        python -m ruff format --check "${paths[@]}"
+        python -m ruff check --select F,E9 "${paths[@]}"
+        python -m compileall -q "${paths[@]}"
