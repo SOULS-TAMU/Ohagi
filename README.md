@@ -33,14 +33,21 @@ in PURIN.
 
 ## Installation
 
-Requires **Python 3.10 or newer**. Install from PyPI:
+Requires **Python 3.10 or newer**. Install the latest compatible release from PyPI:
 
 ```shell
 python -m pip install ohagi
 ```
 
-From a local stack checkout, use `python -m pip install ./purin ./ohagi`.
-Optional integrations are available as `ohagi[flax,orbax,optax,plotting]`.
+To update an existing installation:
+
+```shell
+python -m pip install --upgrade ohagi
+```
+
+PURIN is installed automatically. Optional integrations are available as
+`ohagi[flax,orbax,optax,plotting]`. For source/editable installs, see
+[installation options](https://github.com/SOULS-TAMU/Ohagi/blob/main/docs/INSTALL.md).
 
 ## Basic API
 
