@@ -7,7 +7,7 @@
 **One JAX engine for building, training and deploying hard-constrained neural models.**
 
 [![PyPI](https://img.shields.io/pypi/v/ohagi)](https://pypi.org/project/ohagi/)
-[![Documentation](https://readthedocs.org/projects/ohagi/badge/?version=latest)](https://ohagi.readthedocs.io/en/latest/)
+[![Documentation](https://img.shields.io/readthedocs/ohagi/latest?logo=readthedocs&label=docs)](https://ohagi.readthedocs.io/en/latest/)
 
 [![CI](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/ci.yml?query=branch%3Amain)
 [![Validation](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/validation.yml/badge.svg?branch=main)](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/validation.yml?query=branch%3Amain)
