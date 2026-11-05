@@ -41,6 +41,8 @@ single-instance inference interface.
    changelog
    BUILD
    PUBLISHING
+   QUALITY
+   QUALITY
 
 Indices and search
 ------------------

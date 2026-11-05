@@ -6,6 +6,9 @@
 
 **One JAX engine for building, training and deploying hard-constrained neural models.**
 
+[![PyPI](https://img.shields.io/pypi/v/ohagi)](https://pypi.org/project/ohagi/)
+[![Documentation](https://readthedocs.org/projects/ohagi/badge/?version=latest)](https://ohagi.readthedocs.io/en/latest/)
+
 [![CI](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/ci.yml?query=branch%3Amain)
 [![Validation](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/validation.yml/badge.svg?branch=main)](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/validation.yml?query=branch%3Amain)
 [![CodeQL](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/SOULS-TAMU/Ohagi/actions/workflows/codeql.yml?query=branch%3Amain)
@@ -174,3 +177,5 @@ Use [CITATION.bib](https://github.com/SOULS-TAMU/Ohagi/blob/main/CITATION.bib) f
 in [AUTHORS](https://github.com/SOULS-TAMU/Ohagi/blob/main/AUTHORS) and [NOTICE](https://github.com/SOULS-TAMU/Ohagi/blob/main/NOTICE).
 
 [Changelog](https://github.com/SOULS-TAMU/Ohagi/blob/main/CHANGELOG.md) · [Report an issue](https://github.com/SOULS-TAMU/Ohagi/issues)
+
+Measured source structure and existing quality limits are documented in [Quality](docs/QUALITY.md).
