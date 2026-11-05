@@ -1,0 +1,31 @@
+name: Release consistency
+description: Check package, runtime, citation, changelog, tag and artifact agreement
+inputs:
+  publishing:
+    description: Reject versions already present on the selected package index
+    default: 'false'
+  index:
+    description: Package index (pypi or testpypi)
+    default: pypi
+  artifact-directory:
+    description: Optional directory containing one wheel and one sdist
+    default: ''
+  tag:
+    description: Optional intended release tag
+    default: ''
+runs:
+  using: composite
+  steps:
+    - name: Validate release records and exercise rejection cases
+      shell: bash
+      env:
+        PUBLISHING: ${{ inputs.publishing }}
+        PACKAGE_INDEX: ${{ inputs.index }}
+        ARTIFACT_DIRECTORY: ${{ inputs.artifact-directory }}
+        RELEASE_TAG: ${{ inputs.tag }}
+      run: |
+        args=(--root "$GITHUB_WORKSPACE" --self-test --index "$PACKAGE_INDEX")
+        if [[ "$PUBLISHING" == 'true' ]]; then args+=(--publishing); fi
+        if [[ -n "$ARTIFACT_DIRECTORY" ]]; then args+=(--dist "$ARTIFACT_DIRECTORY"); fi
+        if [[ -n "$RELEASE_TAG" ]]; then args+=(--tag "$RELEASE_TAG"); fi
+        python "$GITHUB_ACTION_PATH/../../shared/release_check.py" "${args[@]}"
